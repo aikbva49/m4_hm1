@@ -1,0 +1,18 @@
+<h1>{{ book_id.title }}</h1>
+<p>{{ book_id.description }}</p>
+<img src="{{ book_id.image.url }}" alt="" width="200">
+
+<a href="{{ book_id.book_file.url }}">Смотреть</a>
+<p>Страниц: {{ book_id.quantity }}</p>
+<p>Жанр: {{ book_id.type_blog }}</p>
+<p>Дата: {{ book_id.created_at }}</p>
+<a href="{{ book_id.book_file.url }}">Читать -> </a>
+
+<p>Автор: {{ book_id.author }}</p>
+<p>Количество страниц: {{ book_id.quantity_pages }}</p>
+<p>Жанр: {{ book_id.genre }}</p>
+<p>Цена: {{ book_id.price }} сом</p>
+<p>Email издателя: {{ book_id.email_publisher }}</p>
+<p>Добавлено: {{ book_id.created_at }}</p>
+
+<a href="/book_list/">Вернуться назад</a>

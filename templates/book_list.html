@@ -1,0 +1,12 @@
+<h1>Список всех книг</h1>
+ 
+{% for i in books %}
+
+<h2>{{ i.title }}</h2>
+<img src="{{ i.image.url }}" alt="{{ i.title }}" width="150">
+<p>Автор: {{ i.author }}</p>
+<p>Жанр: {{ i.genre }}</p>
+
+<a href="/book_detail/{{ i.id }}/">Подробнее</a>
+
+{% endfor %}
