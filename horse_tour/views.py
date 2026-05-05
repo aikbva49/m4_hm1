@@ -18,7 +18,7 @@ def create_review_view(request):
 
         if company_id and tourist_id and marks:
             models.ReviewTour.objects.create(
-                choice_company_id=company_id, # Исправлено имя поля
+                choice_company_id=company_id, 
                 tourist_id=tourist_id,
                 text=text,
                 marks=int(marks)
