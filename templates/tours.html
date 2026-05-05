@@ -1,0 +1,35 @@
+<h1>Конные Туры</h1>
+
+{% for i in companies %}
+    <h2>Название: {{ i.title }}</h2>
+
+    <h3>Услуги</h3>
+    <p>
+        {% for s in i.services.all %}
+            {{ s.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Услуги отсутствуют
+        {% endfor %}
+    </p>
+
+    {% if i.tourist %}
+        <h4>Приписанный турист: {{ i.tourist.name }} (Конь: {{ i.tourist.horse_nickname }})</h4>
+    {% else %}
+        <p>Турист еще не назначен</p>
+    {% endif %}
+
+    <h2>Отзывы</h2>
+    <ul>
+        {% for rev in i.reviews.all %}
+        <li>
+            <p>Оценка - {{ rev.marks }}</p>
+            <p>Текст - {{ rev.text }}</p>
+            <p>Дата отзыва - {{ rev.created_at }}</p>
+        </li>
+        {% empty %}
+            <p>Отзывов нет</p>
+        {% endfor %}
+    </ul>
+    
+    <hr>
+{% endfor %}
