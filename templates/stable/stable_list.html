@@ -1,0 +1,19 @@
+<h2>Список лошадей в конюшне</h2>
+<a href="{% url 'horse_add' %}">Добавить новую лошадь</a>
+<hr>
+
+{% for horse in horses %}
+    <div>
+        <h3>{{ horse.name }}</h3>
+        <p>Возраст: {{ horse.age }}</p>
+        <p>Здоровье: {{ horse.health_status }}</p>
+        
+        {% if horse.photo %}
+            <img src="{{ horse.photo.url }}" width="150">
+        {% endif %}
+        
+        <br>
+        <a href="{% url 'horse_edit' horse.pk %}">Редактировать</a> | 
+        <a href="{% url 'horse_delete' horse.pk %}">Удалить</a>
+    </div>
+    <hr> {% endfor %}
