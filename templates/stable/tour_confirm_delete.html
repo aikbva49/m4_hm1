@@ -1,0 +1,8 @@
+<h2> Удаление тура: "{{ tour.title }}" </h2>
+    <p> Вы уверены? </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Подтвердить удаление</button>
+        <a href="{% url 'tour_list' %}">Отмена</a>
+    </form>

@@ -1,35 +1,40 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Horse
-from .forms import HorseForm
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import HorseTour
+from .forms import TourForm
 
-def horse_list(request):
-    horses = Horse.objects.all()
-    return render(request, 'stable/stable_list.html', {'horses': horses})
+# Список туров (Read)
+def tour_list(request):
+    tours = HorseTour.objects.all()
+    # Исправил путь на stable/, так как папка называется так
+    return render(request, 'stable/tour_list.html', {'tours': tours})
 
-def horse_add(request):
-    if request.method == 'POST':
-        form = HorseForm(request.POST, request.FILES) 
+# Создание тура (Create)
+def tour_create(request):
+    if request.method == "POST":
+        form = TourForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('horse_list')
+            return redirect('tour_list')
     else:
-        form = HorseForm()
-    return render(request, 'stable/stable_form.html', {'form': form})
+        form = TourForm()
+    return render(request, 'stable/tour_form.html', {'form': form, 'title': 'Добавить тур'})
 
-def horse_edit(request, pk):
-    horse = get_object_or_404(Horse, pk=pk)
-    if request.method == 'POST':
-        form = HorseForm(request.POST, request.FILES, instance=horse)
+# Редактирование (Update)
+def tour_update(request, id):
+    tour = get_object_or_404(HorseTour, id=id)
+    if request.method == "POST":
+        form = TourForm(request.POST, request.FILES, instance=tour)
         if form.is_valid():
             form.save()
-            return redirect('horse_list')
+            return redirect('tour_list')
     else:
-        form = HorseForm(instance=horse)
-    return render(request, 'stable/stable_form.html', {'form': form})
+        form = TourForm(instance=tour)
+    return render(request, 'stable/tour_form.html', {'form': form, 'title': 'Редактировать'})
 
-def horse_delete(request, pk):
-    horse = get_object_or_404(Horse, pk=pk)
-    if request.method == 'POST':
-        horse.delete()
-        return redirect('horse_list')
-    return render(request, 'stable_confirm_delete.html', {'horse': horse})
+# Удаление (Delete)
+def tour_delete(request, id):
+    tour = get_object_or_404(HorseTour, id=id)
+    if request.method == "POST":
+        tour.delete()
+        return redirect('tour_list')
+    return render(request, 'stable/tour_confirm_delete.html', {'tour': tour})

@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class StableConfig(AppConfig):
+class OrderTourConfig(AppConfig):
     name = 'stable'

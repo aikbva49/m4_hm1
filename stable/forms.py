@@ -1,7 +1,7 @@
 from django import forms
-from .models import Horse
+from .models import HorseTour
 
-class HorseForm(forms.ModelForm):
+class TourForm(forms.ModelForm):
     class Meta:
-        model = Horse
+        model = HorseTour
         fields = '__all__'
