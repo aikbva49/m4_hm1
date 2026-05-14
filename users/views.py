@@ -32,3 +32,8 @@ def user_list_view(request):
     if request.user.is_authenticated: 
         user_list = models.CustomUser.objects.all()
         return render(request, 'users/user_list.html', {'users_list': user_list})
+    
+
+
+
+    
