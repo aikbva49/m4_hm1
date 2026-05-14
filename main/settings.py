@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'book',
     'horse_tour',
     'stable',
+    'users',
+    'captcha',
 ]
 
 MIDDLEWARE = [

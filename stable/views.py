@@ -5,10 +5,8 @@ from .forms import TourForm
 # Список туров (Read)
 def tour_list(request):
     tours = HorseTour.objects.all()
-    # Исправил путь на stable/, так как папка называется так
     return render(request, 'stable/tour_list.html', {'tours': tours})
 
-# Создание тура (Create)
 def tour_create(request):
     if request.method == "POST":
         form = TourForm(request.POST, request.FILES)
@@ -19,7 +17,6 @@ def tour_create(request):
         form = TourForm()
     return render(request, 'stable/tour_form.html', {'form': form, 'title': 'Добавить тур'})
 
-# Редактирование (Update)
 def tour_update(request, id):
     tour = get_object_or_404(HorseTour, id=id)
     if request.method == "POST":
@@ -31,7 +28,6 @@ def tour_update(request, id):
         form = TourForm(instance=tour)
     return render(request, 'stable/tour_form.html', {'form': form, 'title': 'Редактировать'})
 
-# Удаление (Delete)
 def tour_delete(request, id):
     tour = get_object_or_404(HorseTour, id=id)
     if request.method == "POST":
