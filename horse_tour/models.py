@@ -10,7 +10,7 @@ class ServiceHorse(models.Model):
 
 class TourCompany(models.Model):
     title = models.CharField(max_length=50, default='Elite Horse Tour')
-    services = models.ManyToManyField(ServiceHorse, null=True)
+    services = models.ManyToManyField('Service', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

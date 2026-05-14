@@ -9,11 +9,11 @@ class CustomUser(AbstractUser):
     experience = models.PositiveIntegerField(default=0, verbose_name="Опыт работы (лет)")
     skills = models.TextField(verbose_name="Навыки")
     github_link = models.URLField(blank=True, verbose_name="Ссылка на GitHub")
-    education = models.CharField(max_length=255, verbose_name="Образование")
+    education = models.CharField(max_length=100, verbose_name="Образование")
     
     # 2 поля для файлов
     resume = models.FileField(upload_to='resumes/', verbose_name="Резюме (PDF/Doc)")
-    photo = models.ImageField(upload_to='user_photos/', verbose_name="Фото профиля")
+    photo = models.ImageField(upload_to='user_photos/', verbose_name="Фото")
 
     def __str__(self):
         return f"{self.username} - {self.first_name}"

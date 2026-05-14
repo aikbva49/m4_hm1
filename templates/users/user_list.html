@@ -1,0 +1,21 @@
+<h1>Список пользователей</h1>
+<a href="{% url 'auth_logout' %}">Выйти из системы</a>
+<hr>
+{% for i in us %}
+        <h2>Привет ты - {{ i.username }}</h2>
+        <p>Тебя зовут - {{ i.first_name }} {{ i.last_name }}</p>
+        {% if i.photo %}
+            <img src="{{ i.photo.url }}" alt="фото" width="200" height="200" style="object-fit: cover;">
+        {% endif %}
+        <p>Твой пол - {{ i.gender }}</p> 
+        <p>Твой номер телефона - {{ i.phone_number }}</p>
+        <p>Твой email - {{ i.email }}</p>
+        <p>Опыт работы: {{ i.experience }} лет</p>
+        <p>Образование: {{ i.education }}</p>
+        {% if i.resume %}
+            <p><a href="{{ i.resume.url }}" target="_blank">📄 Открыть резюме (файл)</a></p>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>Список пуст.</p>
+{% endfor %}

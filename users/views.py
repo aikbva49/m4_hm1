@@ -15,7 +15,6 @@ def register_view(request):
 
 def auth_login_view(request):
     if request.method == "POST":
-        # Используем твою кастомную форму, где добавлена капча
         form = forms.CustomLoginForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
@@ -25,13 +24,11 @@ def auth_login_view(request):
         form = forms.CustomLoginForm()
     return render(request, 'users/login.html', {'form': form})
     
-# Логаут
 def auth_logout_view(request):
     logout(request)
     return redirect('/login/')
 
-# Список анкет
 def user_list_view(request):
-    if request.user.is_authenticated: # Проверка авторизации
+    if request.user.is_authenticated: 
         user_list = models.CustomUser.objects.all()
         return render(request, 'users/user_list.html', {'users_list': user_list})
