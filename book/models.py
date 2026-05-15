@@ -1,6 +1,7 @@
 from django.db import models
 
-class Books(models.Model):
+class Book(models.Model): 
+    title = models.CharField(max_length=100)
     title = models.CharField(max_length=50, verbose_name='напишите название книги') 
     description = models.TextField(verbose_name='напишите аннотацию', blank=True) 
     image = models.ImageField(upload_to='books/', verbose_name='загрузите обложку в формате jpg или png', blank=True) 
@@ -19,6 +20,7 @@ class Books(models.Model):
     author = models.CharField(max_length=100, verbose_name='напишите автора', default='Автор неизвестен') 
     price = models.PositiveIntegerField(verbose_name='укажите цену', default=0) 
     email_publisher = models.EmailField(verbose_name='почта издательства', null=True) 
+    views_count = models.PositiveIntegerField(default=0) # Добавь это для баллов!
 
     def __str__(self):
         return self.title
