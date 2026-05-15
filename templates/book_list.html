@@ -1,17 +1,35 @@
 <h1>Список всех книг</h1>
 
- <form action="" method="get">
-    <input type="text" name="q" placeholder="Поиск...">
+<form action="" method="get">
+    <input type="text" name="q" placeholder="Поиск книг...">
     <button type="submit">Найти</button>
 </form>
 
+<hr>
+
 {% for i in books %}
-
-<h2>{{ i.title }}</h2>
-<img src="{{ i.image.url }}" alt="{{ i.title }}" width="150">
-<p>Автор: {{ i.author }}</p>
-<p>Жанр: {{ i.genre }}</p>
-
-<a href="/book_detail/{{ i.id }}/">Подробнее</a>
-
+    <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+        <h2>{{ i.title }}</h2>
+        {% if i.image %}
+            <img src="{{ i.image.url }}" alt="{{ i.title }}" width="150">
+        {% endif %}
+        <p>Автор: {{ i.author }}</p>
+        <p>Жанр: {{ i.genre }}</p>
+        <p>Просмотры: {{ i.views_count }}</p>
+        <a href="/book_detail/{{ i.id }}/">Подробнее</a>
+    </div>
+{% empty %}
+    <p>Книг не найдено.</p>
 {% endfor %}
+
+<div class="pagination">
+    {% if books.has_previous %}
+        <a href="?page={{ books.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">« Назад</a>
+    {% endif %}
+
+    <span>Страница {{ books.number }} из {{ books.paginator.num_pages }}</span>
+
+    {% if books.has_next %}
+        <a href="?page={{ books.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Вперед »</a>
+    {% endif %}
+</div>

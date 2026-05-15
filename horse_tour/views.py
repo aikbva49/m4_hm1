@@ -11,7 +11,8 @@ def horse_tour_list_view(request):
 
     paginator = Paginator(tours_all, 2)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    tours = paginator.get_page(page_number)
+    return render(request, 'horse_tour/tour_list.html', {'tours': tours})
 
 def horse_tour_list(request):
     tours_all = models.TourCompany.objects.all()
@@ -42,4 +43,4 @@ def create_review_view(request):
                 text=text,
                 marks=int(marks)
             )
-    return render(request, 'horse_tour/tour_list.html', {'tours': page_obj})
+    return render(request, 'create_review.html')

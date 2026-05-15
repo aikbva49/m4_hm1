@@ -9,12 +9,11 @@ def book_list_view(request):
         books_all = models.Book.objects.filter(title__icontains=query).order_by('-id')
     else:
         books_all = models.Book.objects.all().order_by('-id')
-
+    
     paginator = Paginator(books_all, 2)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    
-    return render(request, 'book_list.html', {'books': page_obj})
+    books = paginator.get_page(page_number)
+    return render(request, 'book_list.html', {'books': books})
 
 def book_detail_view(request, id):
     book = get_object_or_404(models.Book, id=id)

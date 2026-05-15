@@ -1,25 +1,19 @@
-<h1>{{ book_id.title }}</h1>
+<h1>{{ book.title }}</h1>
 
-<form action="" method="get">
-    <input type="text" name="q" placeholder="Поиск...">
-    <button type="submit">Найти</button>
-</form>
+<p>{{ book.description }}</p>
+<p><strong>Просмотров: {{ book.views_count }}</strong></p>
 
-<p>{{ book_id.description }}</p>
-<p>Просмотров: {{ book.views_count }}</p>
-<img src="{{ book_id.image.url }}" alt="" width="200">
+{% if book.image %}
+    <img src="{{ book.image.url }}" alt="{{ book.title }}" width="200">
+{% endif %}
 
-<a href="{{ book_id.book_file.url }}">Смотреть</a>
-<p>Страниц: {{ book_id.quantity }}</p>
-<p>Жанр: {{ book_id.type_blog }}</p>
-<p>Дата: {{ book_id.created_at }}</p>
-<a href="{{ book_id.book_file.url }}">Читать -> </a>
+<p>Автор: {{ book.author }}</p>
+<p>Количество страниц: {{ book.quantity_pages }}</p>
+<p>Жанр: {{ book.genre }}</p>
+<p>Цена: {{ book.price }} сом</p>
+<p>Email издателя: {{ book.email_publisher }}</p>
+<p>Добавлено: {{ book.created_at|date:"d.m.Y" }}</p>
 
-<p>Автор: {{ book_id.author }}</p>
-<p>Количество страниц: {{ book_id.quantity_pages }}</p>
-<p>Жанр: {{ book_id.genre }}</p>
-<p>Цена: {{ book_id.price }} сом</p>
-<p>Email издателя: {{ book_id.email_publisher }}</p>
-<p>Добавлено: {{ book_id.created_at }}</p>
-
+<a href="{{ book.book_file.url }}" target="_blank">Читать PDF -></a>
+<br><br>
 <a href="/book_list/">Вернуться назад</a>
