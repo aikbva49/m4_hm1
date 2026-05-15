@@ -10,11 +10,11 @@ class ServiceHorse(models.Model):
 
 class TourCompany(models.Model):
     title = models.CharField(max_length=50, default='Elite Horse Tour')
-    services = models.ManyToManyField('Service', blank=True)
+    services = models.ManyToManyField(ServiceHorse, blank=True) 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.title}--{", ".join(i.name for i in self.services.all())}'
+        return self.title
 
     def get_average_rating(self):
         reviews = self.reviews.all()

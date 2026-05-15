@@ -3,25 +3,26 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import CustomUser
 from captcha.fields import CaptchaField
 
-class CustomUserCreationForm(UserCreationForm):
-    captcha = CaptchaField() 
+class CustomRegisterForm(UserCreationForm):
+    captcha = CaptchaField(label='Введите текст с картинки')
 
-    class Meta:
+    class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = (
+        fields = UserCreationForm.Meta.fields + (
             'first_name', 
             'last_name', 
             'email', 
             'phone_number', 
+            'gender',
             'birth_date', 
             'address', 
             'experience', 
             'skills', 
             'github_link', 
             'education', 
-            'resume', 
-            'photo' 
+            'photo', 
+            'resume'
         )
 
-class CustomAuthenticationForm(AuthenticationForm):
-    captcha = CaptchaField()
+class CustomLoginForm(AuthenticationForm):
+    captcha = CaptchaField(label='Вы человек?')
