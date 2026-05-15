@@ -20,7 +20,7 @@ class Book(models.Model):
     author = models.CharField(max_length=100, verbose_name='напишите автора', default='Автор неизвестен') 
     price = models.PositiveIntegerField(verbose_name='укажите цену', default=0) 
     email_publisher = models.EmailField(verbose_name='почта издательства', null=True) 
-    views_count = models.PositiveIntegerField(default=0) # Добавь это для баллов!
+    views_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title

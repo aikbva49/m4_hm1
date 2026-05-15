@@ -1,5 +1,10 @@
 <h1>Список всех книг</h1>
- 
+
+ <form action="" method="get">
+    <input type="text" name="q" placeholder="Поиск...">
+    <button type="submit">Найти</button>
+</form>
+
 {% for i in books %}
 
 <h2>{{ i.title }}</h2>

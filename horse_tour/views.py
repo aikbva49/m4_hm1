@@ -1,6 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404
 from . import models
 from django.core.paginator import Paginator
+
+def horse_tour_list_view(request):
+    query = request.GET.get('q')
+    if query:
+        tours_all = models.TourCompany.objects.filter(services__name__icontains=query).distinct().order_by('-id')
+    else:
+        tours_all = models.TourCompany.objects.all().order_by('-id')
+
+    paginator = Paginator(tours_all, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
 def horse_tour_list(request):
     tours_all = models.TourCompany.objects.all()
@@ -31,13 +42,4 @@ def create_review_view(request):
                 text=text,
                 marks=int(marks)
             )
-def horse_tour_list(request):
-    query = request.GET.get('q')
-    if query:
-        # Ищем услуги по названию
-        tours = models.TourCompany.objects.filter(services__name__icontains=query).distinct()
-    else:
-        tours = models.TourCompany.objects.all()
-
-
-    return render(request, 'horse_tour/tour_list.html', {'tours': tours})
+    return render(request, 'horse_tour/tour_list.html', {'tours': page_obj})

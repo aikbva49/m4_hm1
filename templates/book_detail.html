@@ -1,4 +1,10 @@
 <h1>{{ book_id.title }}</h1>
+
+<form action="" method="get">
+    <input type="text" name="q" placeholder="Поиск...">
+    <button type="submit">Найти</button>
+</form>
+
 <p>{{ book_id.description }}</p>
 <p>Просмотров: {{ book.views_count }}</p>
 <img src="{{ book_id.image.url }}" alt="" width="200">
